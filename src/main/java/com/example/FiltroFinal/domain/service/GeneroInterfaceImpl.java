@@ -59,21 +59,21 @@ public class GeneroInterfaceImpl implements CrudInterface<Genero> {
     @Override
     public ResponseEntity<Genero> update(Object id, Genero generoUpdate) {
         try{
-            Long newId = Long.parseLong(id.toString());
-            Optional<Genero> optionalGenero = generoRepository.findById(newId);
-            if(optionalGenero.isPresent()){
+                Long newId = Long.parseLong(id.toString());
+                Optional<Genero> optionalGenero = generoRepository.findById(newId);
+                if(optionalGenero.isPresent()){
 
-                Genero generoSend = optionalGenero.get();
-                generoSend.setNombreGenero(generoUpdate.getNombreGenero());
-                generoSend.setNombreDescripcion(generoUpdate.getNombreDescripcion());
-                generoRepository.save(generoSend);
+                    Genero generoSend = optionalGenero.get();
+                    generoSend.setNombreGenero(generoUpdate.getNombreGenero());
+                    generoSend.setNombreDescripcion(generoUpdate.getNombreDescripcion());
+                    generoRepository.save(generoSend);
 
-                return ResponseEntity.ok(generoSend);
-            } else {
-                throw new GeneroNotFoundException("Genero no encontrado por dicho ID para actualizar");
-            }
-        }catch (NumberFormatException e){
-            throw new GeneroIdNotFoundException("Haz ingresado una letra u/o otro caracter diferente a un Número de tipo Long");
+                    return ResponseEntity.ok(generoSend);
+                } else {
+                    throw new GeneroNotFoundException("Genero no encontrado por dicho ID para actualizar");
+                }
+            }catch (NumberFormatException e){
+                throw new GeneroIdNotFoundException("Haz ingresado una letra u/o otro caracter diferente a un Número de tipo Long");
         }
     }
 }
